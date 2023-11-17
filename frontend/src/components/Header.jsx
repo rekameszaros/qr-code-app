@@ -8,7 +8,7 @@ const Header = ({ isAuthenticated }) => {
       align="center"
       justify="space-between"
       padding={4}
-      backgroundColor="gray.800"
+      backgroundColor="#000F41"
       color="white"
     >
       {/* Left side - Logos */}

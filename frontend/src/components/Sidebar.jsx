@@ -11,7 +11,7 @@ import {
   DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FiHome, FiCode, FiArchive, FiInfo } from 'react-icons/fi';
+import { FiHome, FiCode, FiArchive, FiInfo, FiSettings, FiMenu } from 'react-icons/fi';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome },
@@ -50,7 +50,8 @@ const SimpleSidebar = () => {
 const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
-      bg={useColorModeValue('white', 'gray.900')}
+    //   bg={useColorModeValue('white', 'gray.900')}
+      bg="#F5F5F5"
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
