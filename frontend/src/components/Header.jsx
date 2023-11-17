@@ -1,8 +1,8 @@
 import React from 'react';
-import { Flex, Stack, Image, Text } from '@chakra-ui/react';
-import { FaHome, FaUser } from 'react-icons/fa';
+import { Flex, Stack, Image, Text, IconButton } from '@chakra-ui/react';
+import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
-const Header = () => {
+const Header = ({ isAuthenticated }) => {
   return (
     <Flex
       align="center"
@@ -13,15 +13,33 @@ const Header = () => {
     >
       {/* Left side - Logos */}
       <Stack direction="row" spacing={4}>
-        <Image src="/path/to/logo1.png" alt="Logo 1" boxSize="40px" />
-        <Image src="/path/to/logo2.png" alt="Logo 2" boxSize="40px" />
+        <Image src="/icons/burger.svg" alt="Burger Icon" boxSize="40px" />
+        <Image src="/images/GEA_Logo_wo_Claim_sRGB_Solid_neg.svg" alt="GEA Logo" boxSize="40px" />
       </Stack>
 
       {/* Right side - User Info */}
       <Stack direction="row" align="center">
-        <FaHome size="20px" />
-        <Text fontWeight="bold">John Doe</Text>
         <FaUser size="20px" />
+        <Text fontWeight="bold">John Doe</Text>
+
+        {/* Conditional rendering based on authentication status */}
+        {isAuthenticated ? (
+          // Logout icon when the user is authenticated
+          <IconButton
+            aria-label="Logout"
+            icon={<FaSignOutAlt size="20px" />}
+            variant="ghost"
+            color="white"
+          />
+        ) : (
+          // Login icon when the user is not authenticated
+          <IconButton
+            aria-label="Login"
+            icon={<FaSignInAlt size="20px" />}
+            variant="ghost"
+            color="white"
+          />
+        )}
       </Stack>
     </Flex>
   );

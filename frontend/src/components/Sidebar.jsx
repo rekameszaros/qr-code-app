@@ -11,14 +11,13 @@ import {
   DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FiHome, FiTrendingUp, FiCompass, FiStar, FiSettings, FiMenu } from 'react-icons/fi';
+import { FiHome, FiCode, FiArchive, FiInfo } from 'react-icons/fi';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'QR Code Generator', icon: FiCode },
+  { name: 'Archive', icon: FiArchive },
+  { name: 'About', icon: FiInfo },
 ];
 
 const SimpleSidebar = () => {
@@ -59,10 +58,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h={{ base: 'auto', md: 'full' }}
       {...rest}
     >
+      {/* Space above the menu points */}
+      <Box h="20" />
+
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        {/* Remove the "Logo" text */}
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

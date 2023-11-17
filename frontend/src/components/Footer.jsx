@@ -1,17 +1,17 @@
 import React from "react";
 import { Box, Image, Text, Flex, Spacer, Center } from "@chakra-ui/react";
 import { FaRegCopyright } from "react-icons/fa";
-// import listImage from "@/public/logo.svg";
 
 const Footer = () => {
   return (
     <Box bg="gray.500" py={4} px={8} textAlign="center" mt="auto" width="100vw">
       <Flex justify="center">
-        {/* <Image src={listImage.src} alt="cph logo" w="200px" h="auto" /> */}
+        <Text color="white">© GEA Group Aktiengesellschaft 2024</Text>
         <Spacer />
         <Flex align="center">
           <FaRegCopyright color="white"/>
-          <Text ml={2} my="auto" color="white">All rights reserved</Text>
+          <Text ml={2} my="auto" color="white">Group Communications and Brand | Digital Channels</Text>
+          <Text ml={2} my="auto" color="white">Privacy policy</Text>
         </Flex>
       </Flex>
     </Box>
