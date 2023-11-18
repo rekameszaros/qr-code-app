@@ -38,11 +38,11 @@ const SimpleSidebar = () => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      <Box flex="1" ml={{ base: 0, md: 60 }} p="4" overflow="auto">
+      {/* <Box flex="1" ml={{ base: 0, md: 60 }} p="4" overflow="auto">
         <Box p={4}>
           <Text fontSize="xl">Main Content Goes Here</Text>
         </Box>
-      </Box>
+      </Box> */}
     </Flex>
   );
 };
@@ -50,12 +50,11 @@ const SimpleSidebar = () => {
 const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
-    //   bg={useColorModeValue('white', 'gray.900')}
       bg="#F5F5F5"
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
-      pos={{ base: 'static', md: 'fixed' }}
+    // To move the sidebar with the content->  pos={{ base: 'static', md: 'fixed' }}
       h={{ base: 'auto', md: 'full' }}
       {...rest}
     >
@@ -91,7 +90,7 @@ const NavItem = ({ icon: IconComponent, children, ...rest }) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
+          bg: '#E6E6F8',
           color: 'white',
         }}
         {...rest}

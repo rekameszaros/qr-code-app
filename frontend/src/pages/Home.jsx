@@ -20,7 +20,7 @@
 
 // export default HomePage;
 
-// Home.jsx
+
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -32,13 +32,21 @@ const HomePage = () => {
   return (
     <Box minH="100vh" display="flex" flexDir="column">
       <Header />
-      <Flex>
+      <Flex flex="1">
         <SimpleSidebar />
-        <Flex flex="1">
-          <Box flex="1/2">
+
+        <Flex
+          flex="1"
+          flexDir={{ base: 'column', md: 'row' }} // Set flex direction based on screen size
+        >
+          <Box flex={{ base: '1', md: '1/2' }} p="4">
             <img src="/public/images/developer.svg" alt="developer-image" />
           </Box>
-          <Box flex="1/2" p="4">
+          <Box
+            flex={{ base: '1', md: '1/2' }} // Adjust flex based on screen size
+            order={{ base: '1', md: '2' }} // Change order for mobile view
+            mb={{ base: '4', md: '0' }} // Add margin-bottom for mobile spacing
+          >
             <Form1 />
           </Box>
         </Flex>
@@ -49,3 +57,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

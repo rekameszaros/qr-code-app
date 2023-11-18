@@ -8,14 +8,14 @@ const Form1 = () => {
       <Heading as="h2" color="gray.800" mb="4">
         Dynamic QR Codes
       </Heading>
-      <Text color="gray.600" mb="4">
+      <Text color="gray.600" mb="6">
         With Dynamic QR Codes, you can create a customized landing page for your QR Code that can be changed and updated whenever you want, no matter if the QR Code is created or even if it went public.
       </Text>
 
       {/* Input fields */}
-      <Input placeholder="Enter value 1" mb="2" />
-      <Input placeholder="Enter value 2" mb="2" />
-      <Input placeholder="Enter value 3" mb="4" />
+      <Input placeholder="Dynamic QR Codes" mb="6" />
+      <Input placeholder="Customized Colors & Shapes for QR Codes" mb="6" />
+      <Input placeholder="QR Code Statistics" mb="8" />
 
       {/* Flex container for form content */}
       <Flex justify="space-between">
