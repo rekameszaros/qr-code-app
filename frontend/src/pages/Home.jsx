@@ -1,26 +1,4 @@
-// import React from 'react';
-// import Header from '../components/header';
-// import Footer from '../components/Footer';
-// import { Box } from '@chakra-ui/react';
-// import SimpleSidebar from '../components/Sidebar';
-
-
-// const HomePage = () => {
-//   return (
-//     <div>
-//       <Header />
-//       <SimpleSidebar />
-//       <Box>
-
-//       </Box>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default HomePage;
-
-
+// Home.jsx
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -40,7 +18,7 @@ const HomePage = () => {
           flexDir={{ base: 'column', md: 'row' }} // Set flex direction based on screen size
         >
           <Box flex={{ base: '1', md: '1/2' }} p="4">
-            <img src="/public/images/developer.svg" alt="developer-image" />
+            <img src="/public/images/developer.svg" alt="developer-image" style={{maxWidth: 575+"px", margin: 100 + "px " + "auto"}}/>
           </Box>
           <Box
             flex={{ base: '1', md: '1/2' }} // Adjust flex based on screen size
@@ -57,4 +35,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
