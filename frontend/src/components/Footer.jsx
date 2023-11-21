@@ -17,7 +17,6 @@ const Footer = () => {
         <Text color="gray.800">© GEA Group Aktiengesellschaft 2024</Text>
         <Spacer />
         <Flex align="center">
-          <FaRegCopyright color="gray.800" />
           <Text ml={2} my="auto" color="gray.800">
             Group Communications and Brand | Digital Channels
           </Text>

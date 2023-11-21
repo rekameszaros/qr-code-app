@@ -8,12 +8,11 @@
 //     cursor="pointer"
 //     display="flex"
 //     alignItems="center"
-//     p="2"
-//     _hover={{ bg: 'gray.200' }}
-//     onClick={onClick}
-//     marginTop="4" // Add top margin
+//     p="4"
+//     _hover={{ bg: '#E6E6F8', width: 'auto' }} // Set hover effect color and width
+//     onClick={isSmallerScreen ? onClick : undefined}
 //   >
-//     <Icon />
+//     <Icon /> {/* Add margin to the left of the icon */}
 //     {!isSmallerScreen && isDrawerOpen && <Box ml="4">{name}</Box>}
 //   </Box>
 // );
@@ -26,51 +25,48 @@
 //     setIsDrawerOpen(!isDrawerOpen);
 //   };
 
-//   const handleCloseDrawer = () => {
-//     setIsDrawerOpen(false);
-//   };
-
 //   return (
-//     <>
-//       <Box
-//         position="relative"
-//         width={isDrawerOpen ? (isSmallerScreen ? '250px' : '250px') : '60px'} // Adjust width when closed
-//         height="auto"
-//         bg="gray.100"
-//         transition="width 0.3s"
-//         top="0"
-//         left="0"
-//         overflowX="hidden"
-//         boxShadow="md"
-//       >
-//         <IconButton
-//           icon={isDrawerOpen ? <FiChevronLeft /> : <FiChevronRight />}
-//           onClick={handleToggleDrawer}
-//           position="absolute"
-//           top="50%" // Center the arrow icon vertically
-//           transform="translateY(-50%)" // Adjust for vertical centering
-//           left={isDrawerOpen ? '200px' : '10px'}
-//           zIndex="999"
-//         />
-//         <Box p="4">
-//           {[
-//             { name: 'Home', icon: FiHome },
-//             { name: 'QR Code Generator', icon: FiCode },
-//             { name: 'Archive', icon: FiArchive },
-//             { name: 'About', icon: FiInfo },
-//           ].map((item, index) => (
-//             <LinkItem
-//               key={index}
-//               name={item.name}
-//               icon={item.icon}
-//               onClick={handleCloseDrawer}
-//               isSmallerScreen={isSmallerScreen}
-//               isDrawerOpen={isDrawerOpen}
-//             />
-//           ))}
-//         </Box>
+//     <Box
+//       display="flex"
+//       flexDirection="column"
+//       width={isDrawerOpen ? '250px' : '60px'}
+//       height="auto"
+//       bg="#F5F5F5"
+//       transition="width 0.3s"
+//       position="relative"
+//       overflowX="hidden"
+//     >
+//       <IconButton
+//         icon={isDrawerOpen ? <FiChevronLeft /> : <FiChevronRight />}
+//         onClick={handleToggleDrawer}
+//         alignSelf="flex-end"
+//         m="2"
+//         position="absolute"
+//         marginTop={8}
+//         right="0"
+//         borderRadius="50px" // Set border radius to 50
+//         backgroundColor="#0303B8" // Set background color to #0303B8
+//         color="white" // Set color to white
+//         _hover={{ backgroundColor: '#5464F8' }} // Set hover color to a lighter shade
+//       />
+//       <Box marginTop="40">
+//         {[
+//           { name: 'Home', icon: FiHome },
+//           { name: 'QR Code Generator', icon: FiCode },
+//           { name: 'Archive', icon: FiArchive },
+//           { name: 'About', icon: FiInfo },
+//         ].map((item, index) => (
+//           <LinkItem
+//             key={index}
+//             name={item.name}
+//             icon={item.icon}
+//             onClick={() => {}}
+//             isSmallerScreen={isSmallerScreen}
+//             isDrawerOpen={isDrawerOpen}
+//           />
+//         ))}
 //       </Box>
-//     </>
+//     </Box>
 //   );
 // };
 
@@ -80,20 +76,22 @@
 import React, { useState } from 'react';
 import { Box, IconButton, useMediaQuery } from '@chakra-ui/react';
 import { FiHome, FiCode, FiArchive, FiInfo, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
-const LinkItem = ({ name, icon: Icon, onClick, isSmallerScreen, isDrawerOpen }) => (
-  <Box
-    cursor="pointer"
-    display="flex"
-    alignItems="center"
-    p="2"
-    _hover={{ bg: 'gray.200' }}
-    onClick={isSmallerScreen ? onClick : undefined} // Only call onClick on smaller screens
-    marginTop="4" // Add top margin
-  >
-    <Icon />
-    {!isSmallerScreen && isDrawerOpen && <Box ml="4">{name}</Box>}
-  </Box>
+const LinkItem = ({ name, icon: Icon, url, onClick, isSmallerScreen, isDrawerOpen }) => (
+    <Link to={url}>
+        <Box
+            cursor="pointer"
+            display="flex"
+            alignItems="center"
+            p="4"
+            _hover={{ bg: '#E6E6F8', width: 'auto' }} // Set hover effect color and width
+            onClick={isSmallerScreen ? onClick : undefined}
+            >
+            <Icon /> {/* Add margin to the left of the icon */}
+            {!isSmallerScreen && isDrawerOpen && <Box ml="4">{name}</Box>}
+        </Box>
+    </Link>
 );
 
 const Sidebar = () => {
@@ -110,28 +108,38 @@ const Sidebar = () => {
       flexDirection="column"
       width={isDrawerOpen ? '250px' : '60px'}
       height="auto"
-      bg="gray.100"
+      bg="#F5F5F5"
       transition="width 0.3s"
-      boxShadow="md"
+      position="relative"
+      overflowX="hidden"
     >
       <IconButton
         icon={isDrawerOpen ? <FiChevronLeft /> : <FiChevronRight />}
         onClick={handleToggleDrawer}
-        alignSelf="flex-start"
+        alignSelf="flex-end"
         m="2"
+        position="absolute"
+        marginTop={8}
+        right="0"
+        borderRadius="50px" // Set border radius to 50
+        backgroundColor="#0303B8" // Set background color to #0303B8
+        color="white" // Set color to white
+        _hover={{ backgroundColor: '#5464F8' }} // Set hover color to a lighter shade
       />
-      <Box p="4">
+      <Box marginTop="40">
+        {/* datastructure here, to define the parameters in LinkItem*/}
         {[
-          { name: 'Home', icon: FiHome },
-          { name: 'QR Code Generator', icon: FiCode },
-          { name: 'Archive', icon: FiArchive },
-          { name: 'About', icon: FiInfo },
+          { name: 'Home', icon: FiHome, url: '/home'},
+          { name: 'QR Code Generator', icon: FiCode, url: '/generator'},
+          { name: 'Archive', icon: FiArchive, url: '/archive' },
+          { name: 'About', icon: FiInfo, url: 'https://geacloud.sharepoint.com/sites/DigitalMarketingKnowledgeCenter/?ovuser=0e17f90f-88a3-4f93-a5d7-cc847cff307e%2cIon.Cioca%40gea.com&OR=Teams-HL&CT=1667483440977&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMjEwMjgwNzIwMCIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D'},
         ].map((item, index) => (
           <LinkItem
             key={index}
             name={item.name}
             icon={item.icon}
-            onClick={() => {}} // Empty function or no function to avoid closing the sidebar
+            url={item.url}
+            onClick={() => {}}
             isSmallerScreen={isSmallerScreen}
             isDrawerOpen={isDrawerOpen}
           />
