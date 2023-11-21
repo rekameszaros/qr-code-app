@@ -121,16 +121,16 @@ const Sidebar = () => {
         position="absolute"
         marginTop={8}
         right="0"
-        borderRadius="50px" // Set border radius to 50
-        backgroundColor="#0303B8" // Set background color to #0303B8
-        color="white" // Set color to white
-        _hover={{ backgroundColor: '#5464F8' }} // Set hover color to a lighter shade
+        borderRadius="50px" 
+        backgroundColor="#0303B8" 
+        color="white"
+        _hover={{ backgroundColor: '#5464F8' }} 
       />
       <Box marginTop="40">
         {/* datastructure here, to define the parameters in LinkItem*/}
         {[
           { name: 'Home', icon: FiHome, url: '/home'},
-          { name: 'QR Code Generator', icon: FiCode, url: '/generator'},
+          { name: 'Generator', icon: FiCode, url: '/generator'},
           { name: 'Archive', icon: FiArchive, url: '/archive' },
           { name: 'About', icon: FiInfo, url: 'https://geacloud.sharepoint.com/sites/DigitalMarketingKnowledgeCenter/?ovuser=0e17f90f-88a3-4f93-a5d7-cc847cff307e%2cIon.Cioca%40gea.com&OR=Teams-HL&CT=1667483440977&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMjEwMjgwNzIwMCIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D'},
         ].map((item, index) => (

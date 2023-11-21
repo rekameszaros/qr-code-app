@@ -1,11 +1,17 @@
 import React from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Sidebar from '../components/Sidebar';
 
-const HomePage = () => {
+const ArchivePage = () => {
   return (
     <div>
-      <h1>Hi!</h1>
+      <Header />
+      <Sidebar />
+      
+      <Footer />
     </div>
   );
 };
 
-export default HomePage;
+export default ArchivePage;
