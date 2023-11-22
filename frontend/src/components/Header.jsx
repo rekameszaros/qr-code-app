@@ -54,11 +54,11 @@ import { FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
 const Header = ({ isAuthenticated, onLogin, onLogout }) => {
   return (
-    <Flex align="center" justify="space-between" padding={4} backgroundColor="#000F41" color="white">
+    <Flex align="center" justify="space-between" paddingLeft={20} paddingRight={20} paddingTop={4} paddingBottom={4} backgroundColor="#000F41" color="white">
       {/* Left side - Logos */}
       <Stack direction="row" spacing={4}>
-        <Image src="/icons/burger.svg" alt="Burger Icon" boxSize="40px" />
-        <Image src="/images/GEA_Logo_wo_Claim_sRGB_Solid_neg.svg" alt="GEA Logo" boxSize="40px" />
+        <Image src="/icons/burger.svg" alt="Burger Icon" boxSize="30px" />
+        <Image src="/images/GEA_Logo_wo_Claim_sRGB_Solid_neg.svg" alt="GEA Logo" /*  boxSize="80px" */ />
       </Stack>
 
       {/* Right side - User Info */}
