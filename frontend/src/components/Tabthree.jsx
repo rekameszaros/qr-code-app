@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, SimpleGrid } from '@chakra-ui/react';
 
-const Design = () => {
+const Logo = () => {
   return (
     <SimpleGrid columns={[1, null, 2]} spacing={[4, 8, 12]} minW="lg" /* gridTemplateRows="repeat(2, 1fr)" */>
       {/* First Box */}
@@ -20,4 +20,4 @@ const Design = () => {
   );
 };
 
-export default Design;
+export default Logo;

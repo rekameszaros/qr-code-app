@@ -5,8 +5,8 @@ import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import General from '../components/Tabone';
-import Design from '../components/Tabthree';
-import Logo from '../components/Tabtwo';
+import Logo from '../components/Tabthree';
+import Design from '../components/Tabtwo';
 
 const QrCodeGenerator = () => {
   return (

@@ -33,7 +33,7 @@
 import React from 'react';
 import { Box, Heading, Text, Input, Flex } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import CustomButton from './Button';
+import { PrimaryButton } from './Button'; 
 
 const Form1 = () => {
   return (
@@ -53,9 +53,9 @@ const Form1 = () => {
       {/* Flex container for form content */}
       <Flex justify="space-between">
         {/* Continue Button on the right */}
-        <CustomButton click={() => window.location.replace('/generator')}>
+        <PrimaryButton click={() => window.location.replace('/generator')}>
           Generate <ChevronRightIcon ml="2" />
-        </CustomButton>
+        </PrimaryButton>
       </Flex>
     </Box>
   );
