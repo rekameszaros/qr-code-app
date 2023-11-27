@@ -118,6 +118,42 @@ import { QRCode } from 'antd';
 const Design = () => {
   const [displayQR, setDisplayQR] = useState(false);
   const [qrurl, setQrurl] = useState('');
+  // setQrCodeColor is a function which sets the QR code color
+  const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor')); // Initializes with the color stored in the session
+  const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
+  // set bg color
+  const [qrCodeBgColor, setQrCodeBgColor] = useState(sessionStorage.getItem('qrBg')); // Initializes with the color stored in the session
+
+  // Function for setting the color when a color is pressed
+  const handleColorChange = (selectedColor) => { 
+    setQrCodeColor(selectedColor); 
+    // Store the color in session storage
+    sessionStorage.setItem('qrColor', selectedColor);
+  };
+
+    // Function for setting the bg color when a color is pressed
+    const handleColorBgChange = (selectedBgColor) => { 
+      setQrCodeBgColor(selectedBgColor); 
+      // Store the color in session storage
+      sessionStorage.setItem('qrBg', selectedBgColor);
+    };
+
+  // This is what the sessionStorage.getItem() does:
+  // function getItem(key) {
+  //   const storage = [{key: "qrUrl", value: "1234"}, {key: "qrColor", value: "#0000"}];
+  //   for (let i = 0; i > storage.length; i++) {
+  //     if (storage[i].key === key) {
+  //       return storage[i].value;
+  //     }
+  //   }
+  // }
+
+
+// Define the color palette of QR
+const colorPalette = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#800080', '#808080', '#FFFFFF'];
+
+// Define the color palette of QR background
+const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#800080', '#808080', '#FFFFFF'];
 
   useEffect(() => {
     // Check if there's a QR code URL in sessionStorage
@@ -133,10 +169,69 @@ const Design = () => {
       {/* First Box */}
       <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" px="20" py="10" w={[100, 300, 300, 400, 560]} maxH="50vh" overflowY="auto">
         <Heading as="h2" size="md" mb={4}>
-          Style your QR Code
+          Style QR color
         </Heading>
+        {/* Color Palette Box */}
+        <FormControl>
+          <FormLabel>Select QR Code Color</FormLabel>
+          <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
+            {colorPalette.map((color) => ( 
+              /*
+              * When using the map function, it runs through a list of elements, with an optional value.
+              * When running through the array, the optional value becomes equal to the value at the current index.
+              * I.e. it says colorPalette[0, 1, 2.... and so on] and takes the value so we can use it later.
+              */
+              <button
+                key={color}
+                style={{
+                  backgroundColor: color,
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleColorChange(color)}
+              />
+            ))}
+          </Box>
+        </FormControl>
 
-        {/* Add your styling controls here */}
+        <FormControl>
+          <FormLabel>Select QR Code Bg Color</FormLabel>
+          <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
+            {colorPaletteBg.map((color) => ( 
+              /*
+              * When using the map function, it runs through a list of elements, with an optional value.
+              * When running through the array, the optional value becomes equal to the value at the current index.
+              * I.e. it says colorPalette[0, 1, 2.... and so on] and takes the value so we can use it later.
+              */
+              <button
+                key={color}
+                style={{
+                  backgroundColor: color,
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleColorBgChange(color)}
+              />
+            ))}
+            </Box>
+
+        </FormControl>
+        <FormLabel>Select QR Code Border Color</FormLabel>
+
+        <FormControl>
+        <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
+          
+        </Box>
+        </FormControl>
+
+        {/* Something needs to be out here for sure */}
+        {/* Add more fields for customization for  example */}
 
         <Flex mt="8" mb="2" justifyContent="space-between">
           <PrimaryButton>
@@ -160,7 +255,7 @@ const Design = () => {
               </Text>
             )}
             <Flex mt="4" direction="column" align="center">
-              <QRCode value={qrurl || '-'} />
+              <QRCode errorLevel={'H'} type='svg' value={qrurl || '-'} color={qrCodeColor} bgColor={qrCodeBgColor} icon={selectedLogo}/>
               <Flex mt="40">
                 <ProgressButton mx="2" leftIcon={<DownloadIcon />}>
                   SVG

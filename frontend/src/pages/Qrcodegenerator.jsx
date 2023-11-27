@@ -17,7 +17,7 @@ const QrCodeGenerator = () => {
         <Sidebar />
         {/* Add your archive content here */}
         <Box mt="20" ml="10" p="4">
-          <Tabs>
+          <Tabs isLazy> {/* Lazy loading the tabs allows us to reload all our hooks. This way, we can make sure that the tabs are always reading the newest values from the session, when a tab is changed */}
             <TabList>
               <Tab>General</Tab>
               <Tab>Design</Tab>

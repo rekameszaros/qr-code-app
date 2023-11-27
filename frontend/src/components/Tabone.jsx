@@ -216,7 +216,7 @@
 
 // export default General;
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex, SimpleGrid, Input, FormControl, FormLabel, Tooltip, IconButton, Heading, Text } from '@chakra-ui/react';
 import { PrimaryButton, ProgressButton } from './Button';
 import { ChevronRightIcon, ChevronLeftIcon, DownloadIcon, InfoIcon } from '@chakra-ui/icons';
@@ -231,7 +231,20 @@ const General = () => {
   const [content, setContent] = useState('');
   const [term, setTerm] = useState('');
 
-  const [qrurl, setQrurl] = useState('');
+  const [qrurl, setQrurl] = useState(sessionStorage.getItem("qrUrl") || '');
+  // if (sessionStorage.getItem("qrUrl") === null or undefined) {
+  //   url = '';
+  // }
+
+  const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
+  const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor'));
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("qrColor")) { 
+      sessionStorage.setItem("qrColor", "black");
+      setQrCodeColor("black");
+    }
+  }, []);
 
   function generatetheqr() {
     let fullUrl;
@@ -257,22 +270,21 @@ const General = () => {
         fullUrl += BASE_UTM + "term=" + term;
       }
 
-      // create QR with UTM
-      setQrurl(fullUrl);
-
-      // Store the qrurl in session storage
-      sessionStorage.setItem('qrUrl', fullUrl);
-      console.log('Full URL:', fullUrl);
     } else if (campaign === "" && source === "" && medium === "") {
       // create QR without UTM
       setQrurl(fullUrl);
 
-      // Store the qrurl in session storage
-      sessionStorage.setItem('qrUrl', fullUrl);
     } else {
-      alert("All or none UTM"); // TODO: figure out a better wording
+      alert("If you are adding UTM, Campaign, Source and Medium must be filled out.");
+      return;
     }
-  }
+
+    // create QR with UTM
+    setQrurl(fullUrl);
+
+    // Store the qrurl in session storage
+    sessionStorage.setItem('qrUrl', fullUrl);
+  };
 
   return (
     <SimpleGrid columns={[1, null, 2]} spacing={[4, 8, 12]} minW="lg" >
@@ -284,7 +296,7 @@ const General = () => {
 
         <FormControl isRequired>
           <FormLabel>URL</FormLabel>
-          <Input bg="white" placeholder="Input 1" mb={4} onChange={(e) => setUrl(e.target.value)}/>
+          <Input borderRadius="0" bg="white" mb={4} onChange={(e) => setUrl(e.target.value)}/>
         </FormControl>
 
         <Heading as="h2" size="md" my={6} textAlign="center">
@@ -309,7 +321,7 @@ const General = () => {
               />
             </Tooltip>
           </FormLabel>
-          <Input bg="white" placeholder="Input 2" mb={4} onChange={(e) => setCampaign(e.target.value)} />
+          <Input bg="white" mb={4} onChange={(e) => setCampaign(e.target.value)} />
         </FormControl>
 
         <FormControl>
@@ -326,7 +338,7 @@ const General = () => {
               />
             </Tooltip>
           </FormLabel>
-          <Input bg="white" placeholder="Input 2" mb={4} onChange={(e) => setSource(e.target.value)} />
+          <Input bg="white" mb={4} onChange={(e) => setSource(e.target.value)} />
         </FormControl>
 
         <FormControl>
@@ -343,7 +355,7 @@ const General = () => {
               />
             </Tooltip>
           </FormLabel>
-          <Input bg="white" placeholder="Input 3" mb={4} onChange={(e) => setMedium(e.target.value)} />
+          <Input bg="white" mb={4} onChange={(e) => setMedium(e.target.value)} />
         </FormControl>
 
         <FormControl>
@@ -360,7 +372,7 @@ const General = () => {
               />
             </Tooltip>
           </FormLabel>
-          <Input bg="white" placeholder="Input 4" mb={4} onChange={(e) => setContent(e.target.value)} />
+          <Input bg="white" mb={4} onChange={(e) => setContent(e.target.value)} />
         </FormControl>
 
         <FormControl>
@@ -377,7 +389,7 @@ const General = () => {
               />
             </Tooltip>
           </FormLabel>
-          <Input bg="white" placeholder="Input 5" mb={4} onChange={(e) => setTerm(e.target.value)} />
+          <Input bg="white" mb={4} onChange={(e) => setTerm(e.target.value)} />
         </FormControl>
 
         <Flex mt="8" mb="2" justifyContent="space-between">
@@ -400,7 +412,7 @@ const General = () => {
           </Text>
         )}
         <Flex mt="4" direction="column" align="center">
-          <QRCode value={qrurl || '-'} />
+          <QRCode errorLevel={'H'} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
           <Flex mt="40">  
             <ProgressButton mx="2" leftIcon={<DownloadIcon />}> SVG</ProgressButton>
             <ProgressButton mx="2" leftIcon={<DownloadIcon />}> PNG</ProgressButton>
