@@ -144,6 +144,7 @@ const ThirdTab = () => {
   const [qrurl, setQrurl] = useState(sessionStorage.getItem('qrUrl'));
   const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor'));
   const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
+  const [errorLevel, setErrorLevel] = useState(sessionStorage.getItem('qrError'));
 
     // Function to handle logo selection
     const handleLogoSelect = (logo) => {
@@ -162,11 +163,13 @@ const ThirdTab = () => {
       {/* First Box */}
       <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" px="20" py="10" w={[100, 300, 300, 400, 560]} maxH="50vh" overflowY="auto">
         <Heading as="h2" size="md" mb={4}>
-          Customize your QR Code
+          Choose an embeded icon
         </Heading>
 
+        <FormControl>
+          <FormLabel>Industry icons</FormLabel>
         {/* Logo Selection */}
-        <Flex mt="4" align="center">
+        <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
           {logos.map((logo) => (
             <IconButton
               key={logo.id}
@@ -176,9 +179,24 @@ const ThirdTab = () => {
               isActive={selectedLogo?.id === logo.id}
             />
           ))}
-        </Flex>
+        </Box>
+        </FormControl>
 
-        {/* Add more fields for customization, for example */}
+        <FormControl>
+          <FormLabel>Scan me icons</FormLabel>
+        {/* Logo Selection */}
+        <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
+
+        </Box>
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>GEA logos</FormLabel>
+        {/* Logo Selection */}
+        <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
+
+        </Box>
+        </FormControl>
 
         <Flex mt="8" mb="2" justifyContent="space-between">
           <PrimaryButton>
@@ -191,7 +209,7 @@ const ThirdTab = () => {
       </Box>
 
       {/* Second Box */}
-      <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" p="10" w={[100, 200, 250, 250, 400]} minH="50vh" maxW="md">
+      <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" p="10" w={[100, 200, 250, 250, 400]} minH="50vh" maxH="md" maxW="md">
         {/* Display the QR code with selected logo */}
         {qrurl && (
           <>
@@ -202,8 +220,8 @@ const ThirdTab = () => {
               </Text>
             )}
             <Flex mt="4" direction="column" align="center">
-              <QRCode errorLevel={'H'} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
-              <Flex mt="40">
+              <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
+              <Flex mt="10">
                 <ProgressButton mx="2" leftIcon={<DownloadIcon />}>
                   SVG
                 </ProgressButton>

@@ -238,11 +238,19 @@ const General = () => {
 
   const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
   const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor'));
+  const [errorLevel, setErrorLevel] = useState(sessionStorage.getItem('qrError'));
 
   useEffect(() => {
     if (!sessionStorage.getItem("qrColor")) { 
       sessionStorage.setItem("qrColor", "black");
       setQrCodeColor("black");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("qrError")) { 
+      sessionStorage.setItem("qrError", "M");
+      setErrorLevel("M");
     }
   }, []);
 
@@ -404,7 +412,7 @@ const General = () => {
       </Box>
 
       {/* Second Box */}
-      <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" p="10" w={[100, 200, 250, 250, 400]} minH="50vh" maxW="md">
+      <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" p="10" w={[100, 200, 250, 250, 400]} minH="50vh" maxH="md" maxW="md">
         {/* Generated full URL */}
         {qrurl && (
           <Text mt="4" color="gray.600" fontSize="sm">
@@ -412,8 +420,8 @@ const General = () => {
           </Text>
         )}
         <Flex mt="4" direction="column" align="center">
-          <QRCode errorLevel={'H'} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
-          <Flex mt="40">  
+          <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
+          <Flex mt="10">  
             <ProgressButton mx="2" leftIcon={<DownloadIcon />}> SVG</ProgressButton>
             <ProgressButton mx="2" leftIcon={<DownloadIcon />}> PNG</ProgressButton>
           </Flex>

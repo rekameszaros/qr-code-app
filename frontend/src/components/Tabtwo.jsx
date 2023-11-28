@@ -122,7 +122,11 @@ const Design = () => {
   const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor')); // Initializes with the color stored in the session
   const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
   // set bg color
-  const [qrCodeBgColor, setQrCodeBgColor] = useState(sessionStorage.getItem('qrBg')); // Initializes with the color stored in the session
+  const [qrCodeBgColor, setQrCodeBgColor] = useState(sessionStorage.getItem('qrBg')); // Initializes with the bg color stored in the session
+  // set bg color
+  const [errorLevel, setErrorLevel] = useState(sessionStorage.getItem('qrError'));
+  
+
 
   // Function for setting the color when a color is pressed
   const handleColorChange = (selectedColor) => { 
@@ -137,6 +141,12 @@ const Design = () => {
       // Store the color in session storage
       sessionStorage.setItem('qrBg', selectedBgColor);
     };
+
+  // Function for setting the error level when a button is clicked
+  const handleErrorLevelChange = (selectedErrorLevel) => {
+    setErrorLevel(selectedErrorLevel);
+    sessionStorage.setItem('qrError', selectedErrorLevel);
+  };
 
   // This is what the sessionStorage.getItem() does:
   // function getItem(key) {
@@ -155,6 +165,9 @@ const colorPalette = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#F
 // Define the color palette of QR background
 const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#800080', '#808080', '#FFFFFF'];
 
+// Define the border color palette of QR background
+const errorLevelPalette = ['L', 'M', 'Q', 'H'];
+
   useEffect(() => {
     // Check if there's a QR code URL in sessionStorage
     const storedQRUrl = sessionStorage.getItem('qrUrl');
@@ -169,11 +182,11 @@ const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '
       {/* First Box */}
       <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" px="20" py="10" w={[100, 300, 300, 400, 560]} maxH="50vh" overflowY="auto">
         <Heading as="h2" size="md" mb={4}>
-          Style QR color
+          Select style
         </Heading>
         {/* Color Palette Box */}
         <FormControl>
-          <FormLabel>Select QR Code Color</FormLabel>
+          <FormLabel>Dots color</FormLabel>
           <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
             {colorPalette.map((color) => ( 
               /*
@@ -198,14 +211,9 @@ const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '
         </FormControl>
 
         <FormControl>
-          <FormLabel>Select QR Code Bg Color</FormLabel>
+          <FormLabel>Background color</FormLabel>
           <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
             {colorPaletteBg.map((color) => ( 
-              /*
-              * When using the map function, it runs through a list of elements, with an optional value.
-              * When running through the array, the optional value becomes equal to the value at the current index.
-              * I.e. it says colorPalette[0, 1, 2.... and so on] and takes the value so we can use it later.
-              */
               <button
                 key={color}
                 style={{
@@ -220,15 +228,30 @@ const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '
               />
             ))}
             </Box>
+       </FormControl>
 
-        </FormControl>
-        <FormLabel>Select QR Code Border Color</FormLabel>
+<FormControl>
+  <FormLabel>Error level </FormLabel>
+  <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
+    {errorLevelPalette.map((level) => (
+      <button
+        key={level}
+        style={{
+          backgroundColor: level === errorLevel ? '#ddd' : '#fff',
+          width: '30px',
+          height: '30px',
+          borderRadius: '50%',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+        onClick={() => handleErrorLevelChange(level)}
+      >
+        {level}
+      </button>
+    ))}
+  </Box>
+</FormControl>
 
-        <FormControl>
-        <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
-          
-        </Box>
-        </FormControl>
 
         {/* Something needs to be out here for sure */}
         {/* Add more fields for customization for  example */}
@@ -244,7 +267,7 @@ const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '
       </Box>
 
       {/* Second Box */}
-      <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" p="10" w={[100, 200, 250, 250, 400]} minH="50vh" maxW="md">
+      <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" p="10" w={[100, 200, 250, 250, 400]} minH="50vh" maxH="md" maxW="md">
         {/* Display the QR code if the state is set to true */}
         {displayQR && (
           <>
@@ -255,8 +278,8 @@ const colorPaletteBg = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '
               </Text>
             )}
             <Flex mt="4" direction="column" align="center">
-              <QRCode errorLevel={'H'} type='svg' value={qrurl || '-'} color={qrCodeColor} bgColor={qrCodeBgColor} icon={selectedLogo}/>
-              <Flex mt="40">
+              <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} bgColor={qrCodeBgColor} icon={selectedLogo}/>
+              <Flex mt="10">
                 <ProgressButton mx="2" leftIcon={<DownloadIcon />}>
                   SVG
                 </ProgressButton>
