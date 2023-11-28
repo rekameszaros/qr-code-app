@@ -238,6 +238,7 @@ const General = () => {
 
   const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
   const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor'));
+  const [qrCodeBgColor, setQrCodeBgColor] = useState(sessionStorage.getItem('qrBg'));
   const [errorLevel, setErrorLevel] = useState(sessionStorage.getItem('qrError'));
 
   useEffect(() => {
@@ -420,7 +421,7 @@ const General = () => {
           </Text>
         )}
         <Flex mt="4" direction="column" align="center">
-          <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
+          <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} bgColor={qrCodeBgColor} icon={selectedLogo}/>
           <Flex mt="10">  
             <ProgressButton mx="2" leftIcon={<DownloadIcon />}> SVG</ProgressButton>
             <ProgressButton mx="2" leftIcon={<DownloadIcon />}> PNG</ProgressButton>

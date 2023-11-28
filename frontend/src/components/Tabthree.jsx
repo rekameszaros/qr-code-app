@@ -143,6 +143,7 @@ import { QRCode } from 'antd';
 const ThirdTab = () => {
   const [qrurl, setQrurl] = useState(sessionStorage.getItem('qrUrl'));
   const [qrCodeColor, setQrCodeColor] = useState(sessionStorage.getItem('qrColor'));
+  const [qrCodeBgColor, setQrCodeBgColor] = useState(sessionStorage.getItem('qrBg'));
   const [selectedLogo, setSelectedLogo] = useState(sessionStorage.getItem('qrLogo'));
   const [errorLevel, setErrorLevel] = useState(sessionStorage.getItem('qrError'));
 
@@ -151,19 +152,52 @@ const ThirdTab = () => {
       setSelectedLogo(logo);
       sessionStorage.setItem('qrLogo', logo);
     };
-  
+
   const logos = [
-    { id: 1, src: '/icons/Cell-based food-white.svg' },
-    { id: 2, src: '/icons/Cell-based food-blue.svg' },
-    // Add more logos
+    { id: 1, src: '/icons/Cell-based food-blue.svg' },
+    { id: 2, src: '/icons/Cell-based food-white.svg' },
+    { id: 3, src: '/icons/Beverage-blue.svg' },
+    { id: 4, src: '/icons/Beverage-white.svg' },
+    { id: 5, src: '/icons/Chemicals-blue.svg' },
+    { id: 6, src: '/icons/Chemicals-white.svg' },
+    { id: 7, src: '/icons/Dairy-Processing-blue.svg' },
+    { id: 8, src: '/icons/Dairy-Processing-white.svg' },
+    { id: 9, src: '/icons/Dairy-Farming-blue.svg' },
+    { id: 10, src: '/icons/Dairy-Farming-white.svg' },
   ];  
+
+  const scanme = [
+    { id: 1, src: '/images/scan-me.png' },
+    { id: 2, src: '/images/scan-me.png' },
+    { id: 3, src: '/images/scan-me.png' },
+    { id: 4, src: '/images/scan-me.png' },
+    { id: 5, src: '/images/scan-me.png' },
+    { id: 6, src: '/images/scan-me.png' },
+    { id: 7, src: '/images/scan-me.png' },
+    { id: 8, src: '/images/scan-me.png' },
+    { id: 9, src: '/images/scan-me.png' },
+    { id: 10, src: '/images/scan-me.png' },
+  ]; 
+
+  const geaLogos = [
+    { id: 1, src: '/images/GEA-Logo-wo-Claim-Solid-neg.svg' },
+    { id: 2, src: '/images/scan-me.png' },
+    { id: 3, src: '/images/scan-me.png' },
+    { id: 4, src: '/images/scan-me.png' },
+    { id: 5, src: '/images/scan-me.png' },
+    { id: 6, src: '/images/scan-me.png' },
+    { id: 7, src: '/images/scan-me.png' },
+    { id: 8, src: '/images/scan-me.png' },
+    { id: 9, src: '/images/scan-me.png' },
+    { id: 10, src: '/images/scan-me.png' },
+  ]; 
   
   return (
     <SimpleGrid columns={[1, null, 2]} spacing={[4, 8, 12]} minW="lg">
       {/* First Box */}
       <Box bg="#E6E6F8" border="1px" borderColor="#D9D9FC" px="20" py="10" w={[100, 300, 300, 400, 560]} maxH="50vh" overflowY="auto">
         <Heading as="h2" size="md" mb={4}>
-          Choose an embeded icon
+          Choose an embeded icons.
         </Heading>
 
         <FormControl>
@@ -186,7 +220,15 @@ const ThirdTab = () => {
           <FormLabel>Scan me icons</FormLabel>
         {/* Logo Selection */}
         <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
-
+        {scanme.map((logo) => (
+            <IconButton
+              key={logo.id}
+              aria-label={`Select Logo ${logo.id}`}
+              icon={<Image src={logo.src} alt={`Logo ${logo.id}`} boxSize="30px" />}
+              onClick={() => handleLogoSelect(logo.src)}
+              isActive={selectedLogo?.id === logo.id}
+            />
+          ))}
         </Box>
         </FormControl>
 
@@ -194,7 +236,15 @@ const ThirdTab = () => {
           <FormLabel>GEA logos</FormLabel>
         {/* Logo Selection */}
         <Box bg="#FFFFFF" border="1px" borderColor="#D9D9FC" mb={4} display="flex" justifyContent="space-between" p="2">
-
+        {geaLogos.map((logo) => (
+            <IconButton
+              key={logo.id}
+              aria-label={`Select Logo ${logo.id}`}
+              icon={<Image src={logo.src} alt={`Logo ${logo.id}`} boxSize="30px" />}
+              onClick={() => handleLogoSelect(logo.src)}
+              isActive={selectedLogo?.id === logo.id}
+            />
+          ))}
         </Box>
         </FormControl>
 
@@ -220,7 +270,7 @@ const ThirdTab = () => {
               </Text>
             )}
             <Flex mt="4" direction="column" align="center">
-              <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} icon={selectedLogo}/>
+              <QRCode errorLevel={errorLevel} type='svg' value={qrurl || '-'} color={qrCodeColor} bgColor={qrCodeBgColor} icon={selectedLogo}/>
               <Flex mt="10">
                 <ProgressButton mx="2" leftIcon={<DownloadIcon />}>
                   SVG
