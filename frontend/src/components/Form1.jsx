@@ -30,19 +30,28 @@
 
 // export default Form1;
 
-import React from 'react';
-import { Box, Heading, Text, Input, Flex } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
-import { PrimaryButton } from './Button'; 
+import React from "react";
+import { Box, Heading, Text, Input, Flex } from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { PrimaryButton } from "./shared/Button";
 
 const Form1 = () => {
   return (
-    <Box maxW="575px" m="100px auto" p="60px" bg="white" borderRadius="8px" boxShadow="md">
+    <Box
+      maxW="575px"
+      m="100px auto"
+      p="60px"
+      bg="white"
+      borderRadius="8px"
+      boxShadow="md"
+    >
       <Heading as="h2" color="gray.800" mb="4">
         Dynamic QR Codes
       </Heading>
       <Text color="gray.600" mb="6">
-        With Dynamic QR Codes, you can create a customized landing page for your QR Code that can be changed and updated whenever you want, no matter if the QR Code is created or even if it went public.
+        With Dynamic QR Codes, you can create a customized landing page for your
+        QR Code that can be changed and updated whenever you want, no matter if
+        the QR Code is created or even if it went public.
       </Text>
 
       {/* Input fields */}
@@ -53,7 +62,7 @@ const Form1 = () => {
       {/* Flex container for form content */}
       <Flex justify="space-between">
         {/* Continue Button on the right */}
-        <PrimaryButton click={() => window.location.replace('/generator')}>
+        <PrimaryButton click={() => window.location.replace("/generator")}>
           Generate <ChevronRightIcon ml="2" />
         </PrimaryButton>
       </Flex>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Flex, Box } from '@chakra-ui/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+import Header from '../components/shared/Header';
+import Footer from '../components/shared/Footer';
+import Sidebar from '../components/shared/Sidebar';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import General from '../components/Tabone';
 import Logo from '../components/Tabthree';

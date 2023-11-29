@@ -48,24 +48,36 @@
 // export default Header;
 
 // Header.jsx
-import React from 'react';
-import { Flex, Stack, Image, Text, IconButton } from '@chakra-ui/react';
-import { FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import React from "react";
+import { Flex, Stack, Image, Text, IconButton } from "@chakra-ui/react";
+import { FaUser, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
 const Header = ({ isAuthenticated, onLogin, onLogout }) => {
   return (
-    <Flex align="center" justify="space-between" paddingLeft={20} paddingRight={20} paddingTop={4} paddingBottom={4} backgroundColor="#000F41" color="white">
+    <Flex
+      align="center"
+      justify="space-between"
+      paddingLeft={20}
+      paddingRight={20}
+      paddingTop={4}
+      paddingBottom={4}
+      backgroundColor="#000F41"
+      color="white"
+    >
       {/* Left side - Logos */}
       <Stack direction="row" spacing={4}>
         <Image src="/icons/burger.svg" alt="Burger Icon" boxSize="30px" />
-        <Image src="/images/GEA_Logo_wo_Claim_sRGB_Solid_neg.svg" alt="GEA Logo" /*  boxSize="80px" */ />
+        <Image
+          src="/images/GEA-Logo-white.svg"
+          alt="GEA Logo" /*  boxSize="80px" */
+        />
       </Stack>
 
       {/* Right side - User Info */}
       <Stack direction="row" align="center">
         <FaUser size="20px" />
         {/* <Text fontWeight="bold">John Doe</Text> */}
-        <Text fontWeight="bold">{sessionStorage.getItem('username')}</Text>
+        <Text fontWeight="bold">{sessionStorage.getItem("username")}</Text>
 
         {/* Conditional rendering based on authentication status */}
         {isAuthenticated ? (

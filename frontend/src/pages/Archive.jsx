@@ -1,19 +1,31 @@
-import React from 'react';
-import { Flex, Box } from '@chakra-ui/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+import React from "react";
+import { Flex, Box, SimpleGrid } from "@chakra-ui/react";
+import Header from "../components/shared/Header";
+import Footer from "../components/shared/Footer";
+import Sidebar from "../components/shared/Sidebar";
+import Card from "../components/shared/Card";
 
 const ArchivePage = () => {
   return (
     <Flex direction="column" minH="100vh">
       <Header />
-
       <Flex flex="1">
         <Sidebar />
-        {/* Add your archive content here */}
-        <Box p="4">
-          <h1>Archive Content Goes Here</h1>
+        <Box ml="10" mr="10" mt="10" mb="10">
+          <SimpleGrid
+            spacing={4}
+            // templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+            templateColumns="repeat(4, 1fr)" // Set to four cards in a row
+          >
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </SimpleGrid>
         </Box>
       </Flex>
 

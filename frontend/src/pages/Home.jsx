@@ -221,17 +221,18 @@
 // export default HomePage;
 
 // Home.jsx
-import React, { useState } from 'react';
-import { Box, Flex, useToast, VStack } from '@chakra-ui/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import SimpleSidebar from '../components/Sidebar';
-import Form1 from '../components/Form1';
-import QRCodeGeneratorPage from './Qrcodegenerator';
-import LoginForm from '../components/LoginForm';
+import React, { useState } from "react";
+import { Box, Flex, useToast, VStack } from "@chakra-ui/react";
+import Header from "../components/shared/Header";
+import Footer from "../components/shared/Footer";
+import SimpleSidebar from "../components/shared/Sidebar";
+import Form1 from "../components/Form1";
+import LoginForm from "../components/LoginForm";
 
 const HomePage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem('id')!= null);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    sessionStorage.getItem("id") != null
+  );
   const [showLoginForm, setShowLoginForm] = useState(false);
   const toast = useToast();
 
@@ -241,13 +242,13 @@ const HomePage = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem('username')
-    sessionStorage.removeItem('email')
-    sessionStorage.removeItem('id')
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("id");
     toast({
-      title: 'Logout Successful',
-      description: 'You have been successfully logged out.',
-      status: 'success',
+      title: "Logout Successful",
+      description: "You have been successfully logged out.",
+      status: "success",
       duration: 3000,
       isClosable: true,
     });
@@ -263,34 +264,49 @@ const HomePage = () => {
 
   return (
     <Box minH="100vh" display="flex" flexDir="column" position="relative">
-      <Header isAuthenticated={isAuthenticated} onLogin={handleLogin} onLogout={handleLogout} />
+      <Header
+        isAuthenticated={isAuthenticated}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      />
       <Flex flex="1">
         <SimpleSidebar />
-        <Flex flex="1" flexDir={{ base: 'column', md: 'row' }}>
-          <Box flex={{ base: '1', md: '1/2' }} p="4">
-            <img src="/public/images/developer.svg" alt="developer-image" style={{ maxWidth: '575px', margin: '100px auto' }} />
+        <Flex flex="1" flexDir={{ base: "column", md: "row" }}>
+          <Box flex={{ base: "1", md: "1/2" }} p="4">
+            <img
+              src="/public/images/developer.svg"
+              alt="developer-image"
+              style={{ maxWidth: "575px", margin: "100px auto" }}
+            />
           </Box>
           <Box
-            flex={{ base: '1', md: '1/2' }}
-            order={{ base: '1', md: '2' }}
-            mb={{ base: '4', md: '0' }}
+            flex={{ base: "1", md: "1/2" }}
+            order={{ base: "1", md: "2" }}
+            mb={{ base: "4", md: "0" }}
             position="relative"
           >
             {/* Conditionally render the login form and other content */}
             {showLoginForm && (
-              <VStack position="absolute" top="0" left="0" right="0" zIndex="999" p="4">
+              <VStack
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                zIndex="999"
+                p="4"
+              >
                 <LoginForm
                   onLogin={() => {
                     setIsAuthenticated(true);
                     setShowLoginForm(false);
                     toast({
-                      title: 'Login Successful',
-                      description: 'You have been successfully logged in.',
-                      status: 'success',
+                      title: "Login Successful",
+                      description: "You have been successfully logged in.",
+                      status: "success",
                       duration: 3000,
                       isClosable: true,
                     });
-                    window.location.replace("/generator")
+                    window.location.replace("/generator");
                   }}
                 />
               </VStack>
